@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tweets</title>
+
+</head>
+<body>
+    <button onclick="tweetPage.agregarnuevoTweet()">Agrega un nuevo Tweet</button>
+    <table id="TableTweets">
+        <thead>
+            <th>User</th>
+            <th>Tweet</th>
+            <th>Fecha</th>
+        </thead>
+        <tbody id="TableBody">
+        </tbody>
+    </table>
+    <script src="TweetsPage.js"></script>
+    <script >
+        const tweetPage = new TweetsPage();
+        tweetPage.mostrarTweets();
+    </script>
+</body>
+</html>
