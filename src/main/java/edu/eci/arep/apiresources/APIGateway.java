@@ -62,7 +62,7 @@ public class APIGateway {
 
     @POST
     @Path("/login")
-    public boolean login(String user) throws IOException {
+    public String login(String user) throws IOException {
         URL obj = new URL("http://localhost:8080/login");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
@@ -88,10 +88,10 @@ public class APIGateway {
             in.close();
 
             System.out.println(response + "\n");
-            return response.toString().equals("true");
+            return response.toString();
         } else {
             System.out.println("GET request did not work.");
-            return false;
+            return "";
         }
     }
 

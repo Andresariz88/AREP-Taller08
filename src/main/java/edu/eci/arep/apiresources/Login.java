@@ -1,5 +1,6 @@
 package edu.eci.arep.apiresources;
 
+import com.google.gson.Gson;
 import edu.eci.arep.entities.User;
 
 import javax.ws.rs.Consumes;
@@ -22,11 +23,15 @@ public class Login {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean login(User user) throws NoSuchAlgorithmException {
+    public String login(User user) throws NoSuchAlgorithmException {
         if (users.containsKey(user.getName())) {
-            return toMD5(user.getPassword()).equals(users.get(user.getName()).getPassword());
+            if (toMD5(user.getPassword()).equals(users.get(user.getName()).getPassword())) {
+                return String.valueOf((users.get(user.getName()).getId()));
+            } else {
+                return "false";
+            }
         } else {
-            return false;
+            return "false";
         }
     }
 

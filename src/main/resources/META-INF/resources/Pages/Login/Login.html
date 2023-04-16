@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
     <title>Login</title>
 </head>
 <body>
@@ -15,9 +17,12 @@
         <label>Password</label>
         <input id="passwordInput" type="password" placeholder="Password">
     </div>
-    <button id="signinButton" onclick="signIn()">Sign in</button>
+    <button id="signinButton" onclick="loginPage.signIn()">Sign in</button>
 
     <script src="LoginPage.js"></script>
+    <script>
+        const loginPage = new LoginPage();
+    </script>
 </div>
 </body>
 </html>
