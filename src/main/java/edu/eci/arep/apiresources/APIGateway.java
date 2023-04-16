@@ -17,15 +17,47 @@ import java.net.URL;
 public class APIGateway {
     private static final String USER_AGENT = "Mozilla/5.0";
 
-
     @GET
     public String getTweets() throws IOException {
-        return tweets();
+        URL obj = new URL("http://localhost:8080/tweets");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.out.println(response + "\n");
+            return response.toString();
+        } else {
+            System.out.println("GET request did not work.");
+            return "";
+        }
     }
 
     @POST
     public void addTweet(String tweet) throws IOException {
-        insertTweet(tweet);
+        URL obj = new URL("http://localhost:8080/tweets");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-type", "application/json");
+        con.setDoOutput(true);
+
+        OutputStream os = con.getOutputStream();
+        os.write(tweet.getBytes());
+        os.flush();
+        os.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
     }
 
     @POST
@@ -63,45 +95,4 @@ public class APIGateway {
         }
     }
 
-
-    private static String tweets() throws IOException {
-        URL obj = new URL("http://localhost:8080/tweets");
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            System.out.println(response + "\n");
-            return response.toString();
-        } else {
-            System.out.println("GET request did not work.");
-            return "";
-        }
-    }
-
-    private static void insertTweet(String body) throws IOException {
-        URL obj = new URL("http://localhost:8080/tweets");
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-type", "application/json");
-        con.setDoOutput(true);
-
-        OutputStream os = con.getOutputStream();
-        os.write(body.getBytes());
-        os.flush();
-        os.close();
-
-        int responseCode = con.getResponseCode();
-        System.out.println("Response Code: " + responseCode);
-    }
 }
