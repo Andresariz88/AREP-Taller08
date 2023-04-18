@@ -29,7 +29,7 @@ class LoginPage{
     })
         .then(response => response.json())
         .then(data => {
-            if (data != 'false') {
+            if (data != false) {
                 sessionStorage.setItem('userId', data);
                 window.location.href='/Pages/TweetsPage/ListTweets.html';
             }

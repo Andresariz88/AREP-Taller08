@@ -19,7 +19,8 @@ import static java.util.Map.entry;
 public class Login {
 
     private Map<String, User> users = Map.ofEntries(
-            entry("admin", new User(1, "admin", "21232F297A57A5A743894A0E4A801FC3")));
+            entry("admin", new User(1, "admin", "21232F297A57A5A743894A0E4A801FC3")),
+            entry("andres", new User(2, "andres", "231BADB19B93E44F47DA1BD64A8147F2")));
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
