@@ -1,6 +1,7 @@
 package edu.eci.arep.apiresources;
 
 import com.google.gson.Gson;
+import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -22,10 +23,11 @@ public class Tweets {
     private List<Tweet> cache = new ArrayList<>();
     private static MongoClient mongo;
     Gson gson = new Gson();
+    private static String DB_URL = "ec2-54-242-121-164.compute-1.amazonaws.com";
 
     @GET
     public String getTweets() {
-        mongo = new MongoClient("ec2-54-242-162-166.compute-1.amazonaws.com", 27017);
+        mongo = new MongoClient(DB_URL, 27017);
         MongoDatabase db = mongo.getDatabase("admin");
         MongoCollection<Document> collection = db.getCollection("tweets");
 
@@ -50,7 +52,7 @@ public class Tweets {
     public void createTweet(Tweet tweet) {
 //        cache.add(tweet);
         String body = gson.toJson(tweet);
-        mongo = new MongoClient( "ec2-54-242-162-166.compute-1.amazonaws.com" , 27017);
+        mongo = new MongoClient( DB_URL, 27017);
         MongoDatabase db = mongo.getDatabase("admin");
 
         MongoCollection<Document> collection = db.getCollection("tweets");
