@@ -147,6 +147,10 @@ Siguiendo con el ejercicio, una vez un usuario haya iniciado sesión, este puede
 
 ![](img/getweet.png)
 
+## Video
+
+[Video](https://drive.google.com/file/d/11uJqFPIto7OvAT0U7vEYLRIxs9acssCQ/view?usp=share_link)
+
 ## Construido con
 
 + [Maven](https://maven.apache.org/) - Dependency Management
