@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <title>Login</title>
+    <title>SignUp</title>
 </head>
 <body>
-<div>
-    <h1>Login</h1>
-    <div style="flex-direction: column">
+    <h1>SignUp</h1>
+    <div style = "flex-direction: column">
         <label>User</label>
         <input id="usernameInput" type="text" placeholder="User Name">
+    </div>
+    <div>
+        <label>Email</label>
+        <input id="emailInput" type="email" placeholder="Email address">
     </div>
     <div>
         <label>Password</label>
         <input id="passwordInput" type="password" placeholder="Password">
     </div>
-    <button id="signinButton" onclick="loginPage.signIn()">SignIn</button>
 
-    <script src="LoginPage.js"></script>
+    <button id="signupButton" onclick="signup.signUp()">SignUp</button>
+
+    <script src="Signup.js"></script>
     <script>
-        const loginPage = new LoginPage();
+        const signup = new Signup();
     </script>
-</div>
 </body>
 </html>

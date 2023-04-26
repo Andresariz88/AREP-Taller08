@@ -61,6 +61,41 @@ public class APIGateway {
     }
 
     @POST
+    @Path("signup")
+    public String signup(String user) throws IOException {
+        URL obj = new URL("http://localhost:8080/signup");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-type", "application/json");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setDoOutput(true);
+
+        OutputStream os = con.getOutputStream();
+        os.write(user.getBytes());
+        os.flush();
+        os.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.out.println(response + "\n");
+            return response.toString();
+        } else {
+            System.out.println("GET request did not work.");
+            return "";
+        }
+    }
+
+    @POST
     @Path("/login")
     public String login(String user) throws IOException {
         URL obj = new URL("http://localhost:8080/login");

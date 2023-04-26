@@ -23,7 +23,7 @@ public class Tweets {
     private List<Tweet> cache = new ArrayList<>();
     private static MongoClient mongo;
     Gson gson = new Gson();
-    private static String DB_URL = "ec2-54-242-121-164.compute-1.amazonaws.com";
+    private static String DB_URL = "ec2-54-226-188-161.compute-1.amazonaws.com";
 
     @GET
     public String getTweets() {
